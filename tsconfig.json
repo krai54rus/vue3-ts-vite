@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -16,6 +17,13 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": [
+    "./plugins/**/*",
+    "./typings/**/*",
+    "./built/**/*", // This is what fixed it!
+    "./node_modules/**/*",
+    "dist"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }],
   "plugins": [
     {
