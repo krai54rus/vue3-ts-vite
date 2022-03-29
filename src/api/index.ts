@@ -1,6 +1,6 @@
-const api = (url: string, data: any): Promise<Response> => {
+const api = (url: string, data?: any): Promise<Response> => {
   const formData = new FormData()
-  ;(Object.keys(data) as Array<keyof typeof data>).forEach((key) => {
+  ;(Object.keys(data) as Array<keyof typeof data>).forEach(key => {
     const field = data[key]
 
     if (field) {
@@ -16,6 +16,10 @@ const api = (url: string, data: any): Promise<Response> => {
     credentials: 'same-origin',
     body: formData,
   })
+}
+
+export const errorHandler = (error: string) => {
+  console.log(`Произошла ошибка: ${error}. Свяжитесь с разработчиками.`)
 }
 
 export default api

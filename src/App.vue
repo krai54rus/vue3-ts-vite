@@ -4,7 +4,7 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link msg="qweewq" to="/about">About</router-link>
+    <router-link msg="about message" to="/about">About</router-link>
   </div>
   <router-view />
 </template>
