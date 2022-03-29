@@ -1,39 +1,18 @@
 import { createStore, createLogger } from 'vuex'
-// import * as getters from './getters'
-// import * as actions from './actions'
-// import mutations from './mutations'
+import module from './modules/module'
 
-const state = {
-  currentThreadID: null,
-  threads: {
-    /*
-    id: {
-      id,
-      name,
-      messages: [...ids],
-      lastMessage
-    }
-    */
-  },
-  messages: {
-    /*
-    id: {
-      id,
-      threadId,
-      threadName,
-      authorName,
-      text,
-      timestamp,
-      isRead
-    }
-    */
-  },
+export interface IRootState {
+  pageConfig: any
+  profile: any
 }
 
 export default createStore({
-  state,
+  // state,
   // getters,
   // actions,
   // mutations,
+  modules: {
+    module: module(),
+  },
   plugins: process.env.NODE_ENV !== 'production' ? [createLogger()] : [],
 })

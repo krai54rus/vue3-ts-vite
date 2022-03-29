@@ -8,7 +8,12 @@
 
 <template>
   <h1>{{ msg }}</h1>
-  seond
+
+  <button type="button" @click="count++">count is: {{ count }}</button>
+  <p>
+    Edit
+    <code>components/HelloWorld.vue</code> to test hot module replacement.
+  </p>
 </template>
 
 <style scoped>
