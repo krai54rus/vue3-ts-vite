@@ -1,5 +1,10 @@
 {
   "singleQuote": true,
   "semi": false,
-  "vueIndentScriptAndStyle": true
+  "vueIndentScriptAndStyle": true,
+  "jsxSingleQuote": true,
+  "arrowParens": "avoid",
+  "max-len": ["error", 140, 2],
+  "tabWidth": 2,
+  "useTabs": false
 }
