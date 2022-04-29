@@ -43,10 +43,13 @@ export default (): Module<IModuleState, IRootState> => ({
         commit('setLoading', true)
 
         const result = await api(
-          'https://jsonplaceholder.typicode.com/todos/20'
+          'https://jsonplaceholder.typicode.com/users',
+          'GET'
         )
 
-        commit('setItems', result)
+        console.log(result.json())
+
+        commit('setItems', result.json())
       } catch (e: any) {
         errorHandler(e)
       } finally {

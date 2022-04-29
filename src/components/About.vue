@@ -1,15 +1,26 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
+  import { useStore } from 'vuex'
+  import api, { errorHandler } from '@/api'
 
   defineProps<{ msg: string }>()
 
-  const count = ref(0)
+  const store = useStore()
+  const data = ref(null)
+  const loading = ref(true)
+  const error = ref(null)
+  await store.dispatch('module/loaditems')
 </script>
 
 <template>
   <h1>About</h1>
   <div>
     <span>{{ msg }}</span>
+    <div>
+      <div v-for="item in data">
+        <span>{{ item }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,12 +32,5 @@
   label {
     margin: 0 0.5em;
     font-weight: bold;
-  }
-
-  code {
-    background-color: #eee;
-    padding: 2px 4px;
-    border-radius: 4px;
-    color: #304455;
   }
 </style>
