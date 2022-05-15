@@ -5,7 +5,33 @@ interface apiOptions {
   body?: any
 }
 
-const api = (url: string, method: string, data?: any): Promise<Response> => {
+type ErrorType = 'unknown' | 'server'
+
+class SystemError extends Error {
+  private type: ErrorType
+
+  constructor(type: ErrorType = 'unknown') {
+    super()
+
+    this.name = 'SystemError'
+    this.type = type
+
+    switch (this.type) {
+      case 'server':
+        this.message = 'Ошибка сервера.\r\nСвяжитесь с разработчиками.'
+        break
+      default:
+        this.message = 'Произошла ошибка.\r\nСвяжитесь с разработчиками.'
+        break
+    }
+  }
+}
+
+const api = async (
+  url: string,
+  method: string,
+  data?: any
+): Promise<Response> => {
   const formData = new FormData()
   if (data) {
     ;(Object.keys(data) as Array<keyof typeof data>).forEach(key => {
@@ -26,7 +52,19 @@ const api = (url: string, method: string, data?: any): Promise<Response> => {
     options.body = formData
   }
 
-  return fetch(`${url}`, options)
+  const result = await fetch(`${url}`, options)
+
+  if (result.status >= 500 && result.status <= 599) {
+    throw new SystemError('server')
+  } else if (result.status !== 200) {
+    throw new SystemError()
+  }
+
+  try {
+    return result.json()
+  } catch (e) {
+    throw new SystemError()
+  }
 }
 
 export const errorHandler = (error: string) => {

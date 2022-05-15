@@ -47,9 +47,9 @@ export default (): Module<IModuleState, IRootState> => ({
           'GET'
         )
 
-        console.log(result.json())
+        console.log(result)
 
-        commit('setItems', result.json())
+        commit('setItems', result)
       } catch (e: any) {
         errorHandler(e)
       } finally {
