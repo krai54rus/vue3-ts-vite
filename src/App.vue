@@ -1,12 +1,14 @@
 <script setup lang="ts"></script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link msg="about message" to="/about">About</router-link>
+  <div>
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link msg="about message" to="/about">About</router-link>
+    </div>
+    <router-view />
   </div>
-  <router-view />
 </template>
 
 <style lang="scss">
