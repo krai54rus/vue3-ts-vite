@@ -1,32 +1,28 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { computed } from 'vue'
+  import { useStore } from 'vuex'
 
-  defineProps<{ msg: string }>()
-
-  const count = ref(0)
+  const store = useStore()
+  store.dispatch('module/loaditems')
+  const data = computed(() => store.state.module.items)
 </script>
 
 <template>
   <h1>About</h1>
-  <div>
-    <span>{{ msg }}</span>
+  <div class="data-list">
+    <div class="data-item" v-for="item in data">
+      <span>{{ item.id }}</span>
+    </div>
   </div>
 </template>
 
-<style scoped>
-  a {
-    color: #42b983;
-  }
-
-  label {
-    margin: 0 0.5em;
-    font-weight: bold;
-  }
-
-  code {
-    background-color: #eee;
-    padding: 2px 4px;
-    border-radius: 4px;
-    color: #304455;
+<style lang="scss" scoped>
+  .data {
+    &-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
   }
 </style>
